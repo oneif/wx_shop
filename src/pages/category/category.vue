@@ -26,7 +26,7 @@
           </view>
           <view class="section">
             <navigator v-for="goods in item.goods" :key="goods.id" class="goods" hover-class="none"
-              :url="`/pages/goods/goods?id=${goods.id}`">
+              :url="`/pages/goods/Goods?id=${goods.id}`">
               <image class="image" :src="goods.picture"></image>
               <view class="name ellipsis">{{ goods.name }}</view>
               <view class="price">
@@ -50,7 +50,7 @@ import type { SwiperItem } from '@/api/homeType'
 import { getCategoryList } from '@/api/category'
 import type { categoryItem } from '@/api/categoryType'
 import { ref, computed } from 'vue';
-import { onLoad, onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app';
+import { onLoad } from '@dcloudio/uni-app';
 
 const swiperList = ref<SwiperItem[]>([])
 const getSwiperData = async () => {
@@ -63,8 +63,6 @@ const activeIndex = ref(0)
 const getCategoryData = async () => {
   const res = await getCategoryList()
   categoryList.value = res.result
-  console.log(categoryList.value);
-
 }
 // 计算出二级分类的数据
 const currCategoryList = computed(() => {
