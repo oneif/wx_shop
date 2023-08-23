@@ -16,7 +16,7 @@ export type SuggesstionItem = {
   type: number
 }
 
-// 首页-猜你喜欢区域数据类型
+// 商品的数据类型
 export type Goods = {
   desc: string
   id: number

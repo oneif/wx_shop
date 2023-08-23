@@ -33,13 +33,19 @@
     {
       "path": "pages/category/category",
       "style": {
-        "navigationBarTitleText": "分类"
+        "navigationBarTitleText": "商品分类"
       }
     },
     {
       "path": "pages/login/login",
       "style": {
         "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/hot/Hot",
+      "style": {
+        "navigationBarTitleText": "热门推荐"
       }
     }
   ],

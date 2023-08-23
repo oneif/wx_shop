@@ -2,7 +2,7 @@
   <CustomNavbar />
   <PageSkeleton v-if="isLoading" />
   <template v-else>
-    <Swiper :swiperList="swiperList" />
+    <Swipers :swiperList="swiperList" />
     <HomeList />
     <Suggestion :list="suggestionList" />
     <Guess ref="guessRef" />
@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import CustomNavbar from '@/pages/index/components/CustomNavbar.vue'
-import Swiper from '@/components/Swiper.vue';
+import Swipers from '@/components/Swipers.vue';
 import HomeList from '@/pages/index/components/HomeList.vue'
 import Suggestion from '@/pages/index/components/Suggestion.vue'
 import Guess from '@/components/Guess.vue';
@@ -25,7 +25,7 @@ const guessRef = ref<InstanceType<typeof Guess>>()
 
 const swiperList = ref<SwiperItem[]>([])
 const getSwiperData = async () => {
-  const res = await getSwiperList()
+  const res = await getSwiperList(1)
   swiperList.value = res.result
 }
 

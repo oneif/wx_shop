@@ -6,7 +6,7 @@ import type { SwiperItem, SuggesstionItem, PageResult } from './homeType'
  * 获取首页轮播图的数据
  * @param distributionSite 广告区域展示位置1 为首页（默认值）2 为商品分类页
  */
-export const getSwiperList = (distributionSite = 1) => {
+export const getSwiperList = (distributionSite = 2) => {
   return request<SwiperItem[]>({
     method: 'GET',
     url: '/home/banner',
