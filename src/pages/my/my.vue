@@ -30,7 +30,7 @@
           </view>
         </view>
       </view>
-      <navigator class="settings" url="/pagesMember/settings/settings" hover-class="none">
+      <navigator class="settings" url="/subPages/settings/settings" hover-class="none">
         设置
       </navigator>
     </view>
