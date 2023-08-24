@@ -28,9 +28,9 @@
 
       <!-- 操作面板 -->
       <view class="action">
-        <view class="item arrow">
+        <view class="item arrow" @tap="openSkuPopup(skuMode.Both)">
           <text class="label">选择</text>
-          <text class="text ellipsis"> 请选择商品规格 </text>
+          <text class="text ellipsis">{{ selectArrText }}</text>
         </view>
         <view class="item arrow" @tap="openPopup('address')">
           <text class="label">送至</text>
@@ -92,8 +92,8 @@
       </navigator>
     </view>
     <view class="buttons">
-      <view class="addcart"> 加入购物车 </view>
-      <view class="buynow"> 立即购买 </view>
+      <view class="addcart" @tap="openSkuPopup(skuMode.car)"> 加入购物车 </view>
+      <view class="buynow" @tap="openSkuPopup(skuMode.buyNow)"> 立即购买 </view>
     </view>
   </view>
 
@@ -102,6 +102,10 @@
     <AddressPanel v-if="popupName == 'address'" @close="popupRef.close()" />
     <ServicePanel v-if="popupName == 'service'" @close="popupRef.close()" />
   </uni-popup>
+
+  <!-- SKU弹窗 -->
+  <vk-data-goods-sku-popup v-model="isShowSku" :localdata="localdata" :mode="mode" ref="skuPopupRef"
+    @add-cart="addCart" />
 </template>
 
 <script setup lang="ts">
@@ -111,6 +115,9 @@ import { getGoodsById } from '@/api/goods'
 import type { GoodsResult } from '@/api/goodsType';
 import AddressPanel from './AddressPanel.vue';
 import ServicePanel from './ServicePanel.vue';
+import type { SkuPopupLocaldata, SkuPopupInstanceType, SkuPopupEvent } from '@/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup.d.ts';
+import { computed } from 'vue';
+import { addMemberCar } from '@/api/car';
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -120,7 +127,22 @@ const goods = ref<GoodsResult>()
 const getGoodsData = async () => {
   const res = await getGoodsById(query.id)
   goods.value = res.result
-  console.log(goods.value);
+  localdata.value = {
+    _id: res.result.id,
+    name: res.result.name,
+    goods_thumb: res.result.mainPictures[0],
+    spec_list: res.result.specs.map((v) => ({ name: v.name, list: v.values })),
+    sku_list: res.result.skus.map((v) => ({
+      _id: v.id,
+      goods_id: res.result.id,
+      goods_name: res.result.name,
+      image: v.picture,
+      price: v.price * 100, // 注意：需要乘以 100
+      stock: v.inventory,
+      sku_name_arr: v.specs.map((vv) => vv.valueName),
+    })),
+
+  }
 }
 
 // 轮播图下标切换
@@ -143,6 +165,25 @@ const openPopup = (name: typeof popupName.value) => {
   popupRef.value.open()
 }
 
+const isShowSku = ref<boolean>(false)
+const localdata = ref({} as SkuPopupLocaldata)
+enum skuMode { Both = 1, car = 2, buyNow = 3 }
+const mode = ref<skuMode>(skuMode.buyNow)
+const openSkuPopup = (value: skuMode) => {
+  isShowSku.value = true
+  mode.value = value
+}
+const skuPopupRef = ref<SkuPopupInstanceType>()
+const selectArrText = computed(() => {
+  return skuPopupRef.value?.selectArr?.join(' ').trim() || '请选择商品规格'
+})
+
+// 添加购物车事件
+const addCart = async (event: SkuPopupEvent) => {
+  await addMemberCar({ skuId: event._id, count: event.buy_num })
+  uni.showToast({ title: '加入购物车成功' })
+  isShowSku.value = false
+}
 onLoad(async () => {
   getGoodsData()
 })

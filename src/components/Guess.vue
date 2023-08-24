@@ -1,7 +1,7 @@
 <template>
     <!-- 猜你喜欢 -->
     <view class="guess">
-        <navigator class="guess-item" v-for="item in guessList" :key="item.id" :url="`/pages/goods/goods?id=4007498`">
+        <navigator class="guess-item" v-for="item in guessList" :key="item.id" :url="`/pages/goods/Goods?id=${item.id}`">
             <image class="image" mode="aspectFill" :src="item.picture"></image>
             <view class="name"> {{ item.name }}</view>
             <view class="price">

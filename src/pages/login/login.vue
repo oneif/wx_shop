@@ -39,9 +39,7 @@ const getLoginPhoneNumber = async () => {
   const memberStore = useMemberStore()
   memberStore.setProfile(res.result)
   uni.showToast({ title: '登录成功' })
-  setTimeout(() => {
-    uni.switchTab({ url: '/pages/my/my' })
-  }, 400);
+  setTimeout(() => { uni.switchTab({ url: '/pages/my/my' }) }, 400);
 }
 </script>
 
