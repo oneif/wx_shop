@@ -1,3 +1,4 @@
+import type { AddressItem } from './addressType'
 import type { Goods } from './homeType'
 
 export type GoodsResult = {
@@ -55,18 +56,4 @@ export type SpecValueItem = {
   desc: string
   name: string
   picture: string
-}
-
-/** 地址信息 */
-export type AddressItem = {
-  receiver: string
-  contact: string
-  provinceCode: string
-  cityCode: string
-  countyCode: string
-  address: string
-  /** 默认地址，1为是，0为否 */
-  isDefault: number
-  id: string
-  fullLocation: string
 }

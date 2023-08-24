@@ -98,12 +98,32 @@
   },
   "subPackages": [
     {
-      "root": "subPages",
+      "root": "userPackages",
       "pages": [
         {
           "path": "settings/settings",
           "style": {
             "navigationBarTitleText": "设置"
+          }
+        },
+        {
+          "path": "userInfo/userInfo",
+          "style": {
+            "navigationBarTitleText": "个人信息",
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "address/address",
+          "style": {
+            "navigationBarTitleText": "地址管理"
+          }
+        },
+        {
+          "path": "addAddress/addAddress",
+          "style": {
+            "navigationBarTitleText": ""
           }
         }
       ]
@@ -112,7 +132,7 @@
   "preloadRule": {
     "pages/my/my": {
       "network": "all",
-      "packages": ["subPages"]
+      "packages": ["userPackages"]
     }
   }
 }
