@@ -103,8 +103,8 @@
   </uni-popup>
 
   <!-- SKU弹窗 -->
-  <vk-data-goods-sku-popup v-model="isShowSku" :localdata="localdata" :mode="mode" ref="skuPopupRef"
-    @add-cart="addCart" />
+  <vk-data-goods-sku-popup v-model="isShowSku" :localdata="localdata" :mode="mode" ref="skuPopupRef" @add-cart="addCart"
+    @buy-now="butNow" />
 </template>
 
 <script setup lang="ts">
@@ -183,6 +183,9 @@ const addCart = async (event: SkuPopupEvent) => {
   uni.showToast({ title: '加入购物车成功' })
   isShowSku.value = false
 }
+// 立即购买事件
+const butNow = (event: SkuPopupEvent) => uni.navigateTo({ url: `/orderPackages/confirmOrder/confirmOrder?skuId=${event._id}&count=${event.buy_num}` })
+
 onLoad(async () => {
   getGoodsData()
 })

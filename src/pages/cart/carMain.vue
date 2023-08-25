@@ -54,8 +54,8 @@
         <text class="text">合计:</text>
         <text class="amount">{{ selectedListPrice }}</text>
         <view class="button-grounp">
-          <view class="button payment-button" @tap="goToPayment" :class="{ disabled: selectedListCount == 0 }"> 去结算({{
-            selectedListCount }})
+          <view class="button payment-button" @tap="goToPayment" :class="{ disabled: selectedListCount == 0 }">
+            去结算({{ selectedListCount }})
           </view>
         </view>
       </view>
@@ -138,6 +138,7 @@ const goToPayment = () => {
   if (selectedList.value?.length == 0) {
     return uni.showToast({ title: '请先选择商品', icon: 'none' })
   }
+  uni.navigateTo({ url: '/orderPackages/confirmOrder/confirmOrder' })
 }
 
 onShow(() => {

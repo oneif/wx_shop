@@ -6,14 +6,15 @@
         <uni-swipe-action class="address-list">
           <!-- 收货地址项 -->
           <uni-swipe-action-item class="item" v-for="item in addressList" :key="item.id">
-            <view class="item-content">
+            <view class="item-content" @tap="changeAddrss(item)">
               <view class="user">
                 {{ item.receiver }}
                 <text class="contact">{{ item.address }}</text>
                 <text v-if="item.isDefault" class="badge">默认</text>
               </view>
               <view class="locate">{{ item.fullLocation }} {{ item.address }}</view>
-              <navigator class="edit" hover-class="none" :url="`/userPackages/addAddress/addAddress?id=${item.id}`">
+              <navigator class="edit" hover-class="none" :url="`/userPackages/addAddress/addAddress?id=${item.id}`"
+                @tap.stop="() => { }">
                 修改
               </navigator>
             </view>
@@ -39,6 +40,7 @@ import { ref } from 'vue';
 import { getAddressList, deleteAddressById } from '@/api/address';
 import type { AddressItem } from '@/api/addressType';
 import { onShow } from '@dcloudio/uni-app';
+import { useAddressStore } from '@/stores/modules/address';
 
 
 const addressList = ref<AddressItem[]>([])
@@ -57,6 +59,13 @@ const deleteAddress = (id: string) => {
       }
     },
   })
+}
+
+// 修改收获地址
+const changeAddrss = (item: AddressItem) => {
+  const addressStore = useAddressStore()
+  addressStore.changeSelectedAddress(item)
+  uni.navigateBack()
 }
 
 onShow(() => { getAddresssData() })
