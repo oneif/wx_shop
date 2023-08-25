@@ -42,7 +42,6 @@
         </view>
       </view>
     </view>
-
     <!-- 商品详情 -->
     <view class="detail panel">
       <view class="title">
@@ -87,7 +86,7 @@
       <button class="icons-button" open-type="contact">
         <text class="icon-handset"></text>客服
       </button>
-      <navigator class="icons-button" url="/pages/cart/cart" open-type="switchTab">
+      <navigator class="icons-button" url="/pages/cart/carNormal">
         <text class="icon-cart"></text>购物车
       </navigator>
     </view>

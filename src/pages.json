@@ -27,7 +27,13 @@
       }
     },
     {
-      "path": "pages/cart/cart",
+      "path": "pages/cart/carTab",
+      "style": {
+        "navigationBarTitleText": "购物车"
+      }
+    },
+    {
+      "path": "pages/cart/carNormal",
       "style": {
         "navigationBarTitleText": "购物车"
       }
@@ -84,7 +90,7 @@
       },
       {
         "text": "购物车",
-        "pagePath": "pages/cart/cart",
+        "pagePath": "pages/cart/carTab",
         "iconPath": "static/tabs/car_default.png",
         "selectedIconPath": "static/tabs/car_selected.png"
       },
