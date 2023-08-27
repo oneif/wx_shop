@@ -23,7 +23,10 @@ const requestInterceptor = {
     }
     // 添加token
     const token = memberStore.profile?.token
-    if (token) options.header.Authorization = token
+    if (token) {
+      if (options.url == 'https://pcapi-xiaotuxian-front.itheima.net/home/goods/guessLike') return
+      else options.header.Authorization = token
+    }
   },
 }
 // 请求拦截器

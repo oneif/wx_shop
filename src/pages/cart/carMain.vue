@@ -1,5 +1,5 @@
 <template>
-  <scroll-view scroll-y class="scroll-view">
+  <scroll-view scroll-y class="scroll-view" @scrolltolower="onScrolltolower">
     <!-- 已登录: 显示购物车 -->
     <template v-if="memberStore.profile">
       <!-- 购物车列表 -->
@@ -78,7 +78,7 @@
 import { deleteMemberCarById, getMemberCarList, updateMemberCarById, updateMemberCarSelectedAll } from '@/api/car';
 import type { CartItem } from '@/api/carType';
 import { useMemberStore } from '@/stores';
-import { onShow } from '@dcloudio/uni-app';
+import { onPullDownRefresh, onReachBottom, onShow } from '@dcloudio/uni-app';
 import { computed, ref } from 'vue';
 import Guess from '@/components/Guess.vue';
 import type { InputNumberBoxEvent } from '@/components/vk-data-input-number-box/vk-data-input-number-box';
@@ -147,6 +147,8 @@ onShow(() => {
     getMemberCarData()
   }
 })
+import { useGuessList } from '@/composables';
+const { guessRef, onScrolltolower } = useGuessList()
 </script>
 
 <style lang="scss">
