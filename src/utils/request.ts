@@ -1,6 +1,8 @@
 import { useMemberStore } from '@/stores'
 
-const baseUrl = 'https://pcapi-xiaotuxian-front-devtest.itheima.net'
+// https://pcapi-xiaotuxian-front.itheima.net
+// https://pcapi-xiaotuxian-front-devtest.itheima.net
+const baseUrl = 'https://pcapi-xiaotuxian-front.itheima.net'
 // 返回结果的类型
 interface Data<T> {
   code: string
